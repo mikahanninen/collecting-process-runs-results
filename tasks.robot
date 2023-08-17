@@ -36,7 +36,7 @@ Process list sync
     ${processes}=    Evaluate    [item for item in $processes if "name" in item.keys()]
     Set Task Variable    ${PROCESSES}    ${processes}
     TRY
-        Get File Asset    Process Run Database    path=${CURDIR}${/}process_runs.db    overwrite=True
+        Get File Asset    Process Run Database    path=${DB_FILE}    overwrite=True
         Connect    ${DB_FILE}
         FOR    ${p}    IN    @{processes}
             ${query}=    Set Variable
