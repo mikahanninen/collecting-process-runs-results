@@ -77,7 +77,6 @@ Process runs sync
     ...    endTs=${EMPTY}
     Connect    ${DB_FILE}
     FOR    ${p}    IN    @{PROCESSES}
-        Log Dictionary    ${p}    WARN
         ${runs}=    List Process Runs    process_id=${p}[id]    limit=99999
         ${runs}=    Evaluate    sorted($runs, key=lambda k: k['runNo'], reverse=True)
         FOR    ${r}    IN    @{runs}
@@ -86,7 +85,6 @@ Process runs sync
             ELSE
                 ${endTs}=    Set Variable    ${NONE}
             END
-            Log Dictionary    ${r}    WARN
             Set To Dictionary    ${run_entry}
             ...    process_name=${p}[name]
             ...    process_id=${p}[id]
